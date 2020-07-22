@@ -1,4 +1,6 @@
-# NgrxUnitTesting
+# Ngrx Unit Testing
+
+The purpose of this project is a research current ways to testing the NgRx store in Angular application.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
 
