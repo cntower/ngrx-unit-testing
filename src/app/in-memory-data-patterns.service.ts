@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-
-interface Pattern {
-  id: number;
-  name: string;
-  description: string;
-  type: string;
-}
+import { Pattern } from './../app/app-store/pattern/pattern.model';
 
 @Injectable({
   providedIn: 'root',
@@ -79,8 +73,7 @@ export class InMemoryDataPatternsService implements InMemoryDbService {
       {
         id: 10,
         name: 'Facade',
-        description:
-          'provides a simplified interface to a large body of code.',
+        description: 'provides a simplified interface to a large body of code.',
         type: 'Structural',
       },
       {
@@ -100,8 +93,7 @@ export class InMemoryDataPatternsService implements InMemoryDbService {
       {
         id: 13,
         name: 'Chain of responsibility',
-        description:
-          'delegates commands to a chain of processing objects.',
+        description: 'delegates commands to a chain of processing objects.',
         type: 'Behavioral',
       },
       {

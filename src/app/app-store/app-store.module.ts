@@ -4,7 +4,6 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
-import * as fromPattern from './pattern.reducer';
 
 @NgModule({
   declarations: [],
@@ -18,7 +17,6 @@ import * as fromPattern from './pattern.reducer';
       },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    StoreModule.forFeature(fromPattern.patternsFeatureKey, fromPattern.reducer),
   ],
 })
 export class AppStoreModule {}
