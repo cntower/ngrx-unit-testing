@@ -4,6 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { PatternEffects } from '../app-store/pattern';
 
 @NgModule({
   declarations: [],
@@ -16,6 +18,7 @@ import { environment } from '../../environments/environment';
         strictActionImmutability: true,
       },
     }),
+    EffectsModule.forRoot([PatternEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
 })
