@@ -2,19 +2,66 @@
 
 The purpose of this project is a research current ways to testing the NgRx store in Angular application.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
+## Testing methodology
+
+The article [NgRx Unit Test Theory](https://medium.com/@joshblf/ngrx-unit-test-theory-c5ad8ba7a8e1) by Josh Hicks will be used as the unit testing methodology.
+
+### As we are writing tests we can ask ourselves questions about what we’re doing:
+
+1. What specific unit am I trying to test right now?
+2. What does this unit do?
+3. What parameters does it take in?
+4. What should it return?
+5. What happens when something goes wrong?
+6. How can I break it on purpose to test the error state?
+7. What tools do I have available to test this effectively?
+
+These questions will be the template for creating unit tests as we go.
+
+### Testing Actions
+
+1. The specific unit I’m trying to test is the Action creator class.
+2. This unit is responsible for storing data to be passed to the receiver. (type, payload)
+3. It takes in 0–1 parameters that will become the payload.
+4. It should return an object with the type property and optionally have a payload property with values for each.
+5. If something goes wrong we should get an error message. Usually about using the incorrect “type” of payload.
+6. If I want to break it, I could intentionally pass the wrong type of payload.
+7. I could create a mock payload, then I can use the “expect” method to verify that the action class is equal to my mock data.
+
+### Testing Effects
+
+1. The specific unit is the Effect observable.
+2. This unit listens for an action type, performs a side-effect, and then usually returns an observable of an Action.
+3. It takes in an Action with a type and an optional payload.
+4. It usually returns an observable of an Action.
+5. If something goes wrong there could be several errors from several different points. It could be incorrect Action payloads,  failed HTTP calls, bad data transforms, etc.
+6. Depending on the effect I could pass in the incorrect payload.
+7. I can use provideMockActions to mock the latest action in the Actions stream. I can “expect” a certain action to be returned. I can “spy” on service calls that happen inside the side-effect.
+
+### Testing Reducers
+
+1. The unit is the reducer function.
+2. The unit takes in 2 arguments and uses a switch statement to return an object.
+3. The unit takes a State argument which is the current data object in memory, and an Action, which has a type and an optional payload.
+4. It must return an object which represents the new State.
+5. If something goes wrong there will most likely be a Type error.
+6. To break it on purpose I could purposely omit properties in the new State object. Or I could omit an argument.
+7. This can be called like a function because it is! This means I can mock the arguments and then “expect” the returned object to equal my mock data.
+
+### Testing Selectors
+
+1. The unit is the selector function.
+2. The unit uses the NgRx createSelector method which accepts a varying number of state slices, up to 8, and then returns a slice of State based on those arguments.
+3. It accepts up to 8 arguments which are also selector functions, and a “props” value that can be used for deriving state.
+4. It should return a piece of state, which could be anything.
+5. If something goes wrong there could be an error regarding Types, missing state, and inner logic errors if using “derived state”.
+6. To break a Selector, you can pass in bad arguments or incorrect props values.
+7. NgRx createSelector functions come with the ability to use the “.projector()” method which allows you to easily pass in mock arguments, and “expect” a return State value.
+
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
