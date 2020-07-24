@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { InMemoryDataPatternsService } from './in-memory-data-patterns.service';
 import { AppStoreModule } from './app-store/app-store.module';
 import { PatternsComponent } from './patterns/patterns.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [AppComponent, PatternsComponent],
@@ -16,6 +19,9 @@ import { PatternsComponent } from './patterns/patterns.component';
       delay: 500,
     }),
     AppStoreModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
