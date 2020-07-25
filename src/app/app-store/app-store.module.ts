@@ -16,6 +16,10 @@ import { PatternEffects } from '../app-store/pattern';
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
       },
     }),
     EffectsModule.forRoot([PatternEffects]),

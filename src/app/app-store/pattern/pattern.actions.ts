@@ -10,6 +10,6 @@ export const loadPatternsSuccess = createAction(
 );
 
 export const loadPatternsFailure = createAction(
-  '[Pattern/API] Load Patterns Success',
+  '[Pattern/API] Load Patterns Failure',
   props<{ error: any }>()
 );
