@@ -18,15 +18,17 @@ The article [NgRx Unit Test Theory](https://medium.com/@joshblf/ngrx-unit-test-t
 
 These questions will be the template for creating unit tests as we go.
 
+
 ### Testing Actions
 
-1. The specific unit I’m trying to test is the Action creator class.
-2. This unit is responsible for storing data to be passed to the receiver. (type, payload)
-3. It takes in 0–1 parameters that will become the payload.
-4. It should return an object with the type property and optionally have a payload property with values for each.
-5. If something goes wrong we should get an error message. Usually about using the incorrect “type” of payload.
-6. If I want to break it, I could intentionally pass the wrong type of payload.
-7. I could create a mock payload, then I can use the “expect” method to verify that the action class is equal to my mock data.
+1. The specific unit I’m trying to test is the Action creator function.
+2. Action is responsible for express unique events that happen throughout your application. `createAction` function creates a configured Creator function that, when called, returns an object in the shape of the Action interface.
+3. It takes in parameters type that describes the action that will be dispatched and config - additional metadata needed for the handling of the action.
+4. It should return a configured Creator function.
+5. If something goes wrong we should get a Type error.
+6. If set config with Props<P> function TS will check of payload type error.
+7. We can test that all action types are according to them literals.
+
 
 ### Testing Effects
 
@@ -38,6 +40,7 @@ These questions will be the template for creating unit tests as we go.
 6. Depending on the effect I could pass in the incorrect payload.
 7. I can use provideMockActions to mock the latest action in the Actions stream. I can “expect” a certain action to be returned. I can “spy” on service calls that happen inside the side-effect.
 
+
 ### Testing Reducers
 
 1. The unit is the reducer function.
@@ -47,6 +50,7 @@ These questions will be the template for creating unit tests as we go.
 5. If something goes wrong there will most likely be a Type error.
 6. To break it on purpose I could purposely omit properties in the new State object. Or I could omit an argument.
 7. This can be called like a function because it is! This means I can mock the arguments and then “expect” the returned object to equal my mock data.
+
 
 ### Testing Selectors
 
